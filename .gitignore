@@ -1,6 +1,7 @@
 # Fichiers locaux
 /COMMANDES-LOCAL.md
 /Jenkinsfile.backup
+/bdd.sql
 
 # Dependances
 **/node_modules/
