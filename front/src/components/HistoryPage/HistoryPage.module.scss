@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@400;600&display=swap');
+
+
+$color-dark-green: #142C24;
+$color-light-beige: #FEF7EB;
+$color-ochre: #BF8D3D;
+$color-status-remis: #556B2F; 
+
+// Typographie
+$font-title: 'Playfair Display', serif;
+$font-body: 'Poppins', sans-serif;
+
+.container {
+  font-family: $font-body;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  background-color: $color-light-beige;
+  border-radius: 12px;
+}
+
+.title { margin: 0; }
+:global(.MuiTypography-root).title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 1.1;
+  text-align: center;
+  color: $color-dark-green;
+  &:hover:after {
+    width: 120px;
+    left: calc(50% - 60px);
+  }
+}
+
+.separator {
+  width: 80px;
+  height: 4px;
+  background-color: $color-ochre;
+  margin: 0.5rem auto 2rem;
+  border-radius: 2px;
+}
+
+.paper {
+  background-color: white;
+  border-radius: 50px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba($color-dark-green, 0.05);
+}
+
+.table {
+  min-width: 650px;
+  
+  .tableHeaderCell {
+    background-color: $color-dark-green;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  .tableRow {
+    &:hover {
+      background-color: lighten($color-ochre, 30%);
+      cursor: pointer;
+    }
+  }
+
+  .tableCell {
+    color: $color-dark-green;
+    text-align: center;
+    border-right: 1px solid rgba($color-dark-green, 0.1);
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  .statusRemis, .statusNonRemis {
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 20px;
+    color: white;
+  }
+
+  .statusRemis {
+    background-color: $color-status-remis;
+  }
+
+  .statusNonRemis {
+    background-color: $color-ochre;
+  }
+}
+
+.pagination {
+  .MuiTablePagination-toolbar {
+    color: $color-dark-green;
+  }
+  .MuiSvgIcon-root {
+    color: $color-dark-green;
+  }
+}
+
+.giftWrapper {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.gift {
+  width: 80px;
+  height: auto;
+  animation: shake 2s infinite ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-15deg);
+  }
+  50% {
+    transform: rotate(15deg);
+  }
+  75% {
+    transform: rotate(-15deg);
+  }
+}

@@ -1,0 +1,97 @@
+/* src/components/Header/NavBar.module.scss */
+@import '../../styles/_variables.scss';
+
+.nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  gap: $spacing-unit * 4;
+  box-sizing: border-box;
+}
+
+.navItems {
+  display: flex;
+  gap: $spacing-unit * 4;
+  align-items: center;
+}
+
+.navItem {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: $color-dark;
+  cursor: pointer;
+  padding: $spacing-unit 0;
+  text-decoration: none;
+}
+
+.burger {
+  display: none !important;
+  color: $color-dark;
+}
+
+.drawer {
+  width: 200px;
+  padding: $spacing-unit * 4;
+  box-sizing: border-box;
+}
+
+
+.btn {
+  padding: 0.75rem 1.25rem;     
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+
+  svg { flex: 0 0 auto; }
+}
+
+.btnPrimary {
+  background: #142C24;
+  color: #FFFFFF;
+
+  &:hover {
+    background: lighten(#142C24, 5%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(20,44,36, 0.3);
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  .navItems {
+    display: none;
+  }
+  .burger {
+    display: block !important;
+  }
+}
+
+:global(.nav-links) {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+:global(.nav-link) {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  color: hsl(var(--muted-foreground));
+  transition: color .2s ease;
+}
+
+:global(.nav-link:hover) {
+  color: hsl(var(--primary));
+}

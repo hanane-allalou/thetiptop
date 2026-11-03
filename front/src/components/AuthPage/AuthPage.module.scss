@@ -1,0 +1,207 @@
+@use '../../styles/variables' as v;
+
+// variables locales
+$input-height: 56px;
+$logo-width: 140px;
+
+.wrapper {
+  background-color: v.$color-bg;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: v.$spacing-unit * 6;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.logoWrapper {
+  border: 1px solid v.$color-dark;
+  border-radius: v.$border-radius;
+  padding: v.$spacing-unit * 3;
+  background-color: v.$color-bg;
+  margin-bottom: v.$spacing-unit * 6;
+}
+
+.logo {
+  width: $logo-width;
+  height: auto;
+}
+
+.tagline {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 100%;
+  text-align: center;
+  color: v.$color-dark;
+  margin-bottom: v.$spacing-unit * 4;
+}
+
+.title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 80px;
+  line-height: 100%;
+  text-align: center;
+  color: v.$color-primary;
+  margin-bottom: v.$spacing-unit * 5;
+}
+
+.title { margin: 0 0 v.$spacing-unit * 5; }
+.tagline { margin: 0 0 v.$spacing-unit * 4; }
+
+
+:global(.MuiTypography-root).title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 80px;
+  line-height: 1;
+  color: v.$color-primary;
+}
+
+:global(.MuiTypography-root).tagline {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1;
+  color: v.$color-dark;
+}
+
+// grille pour grands écrans
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto auto;
+  row-gap: v.$spacing-unit * 2;
+  column-gap: v.$spacing-unit * 6;
+  width: 900px;
+  margin-bottom: v.$spacing-unit * 4;
+  align-items: start;
+}
+  
+
+// mobile stacked layout
+.mobileStack {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 450px;
+  gap: v.$spacing-unit * 3;
+  margin-bottom: v.$spacing-unit * 6;
+}
+
+.field {
+  width: 100%;
+}
+
+.field .MuiOutlinedInput-root {
+  height: $input-height;
+  display: flex;
+  align-items: center;
+}
+
+.field .MuiOutlinedInput-input {
+  padding: 0 v.$spacing-unit * 2;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.socialButton {
+  height: $input-height !important;
+  width: 100% !important;
+  border-radius: v.$border-radius !important;
+  border: 1px solid v.$color-dark !important;
+  background-color: #fff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 v.$spacing-unit * 2 !important;
+}
+
+.primaryButton,
+.secondaryButton {
+  height: $input-height !important;
+  width: 100% !important;
+  border-radius: v.$border-radius !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.primaryButton {
+  background-color: v.$color-primary !important;
+  color: #fff !important;
+}
+
+.secondaryButton {
+  background-color: v.$color-primary !important;
+  color: #fff !important;
+}
+
+.orLabel {
+  color: v.$color-dark;
+  font-weight: 500;
+}
+
+.bottomImagePlaceholder {
+  width: 100px;
+  height: 100px;
+  margin-bottom: v.$spacing-unit * 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gift {
+  width: 100px;
+  height: 100px;
+}
+
+/* ——— Rythme d’espacement ——— */
+$content-gap: v.$spacing-unit * 4;
+
+/* Espace vertical régulier entre tagline, titre, formulaire, etc. */
+.content {
+  gap: $content-gap;
+}
+
+/* Evite le cumul margin + gap (on laisse le gap gérer l'espace) */
+.title, .tagline { margin-bottom: 0; }
+
+/* Un peu plus d’air entre les éléments du grid desktop */
+.formGrid {
+  row-gap: v.$spacing-unit * 4;     /* avant: *3 */
+  column-gap: v.$spacing-unit * 6;  /* un chouïa plus serré qu'*8 */
+  margin-bottom: v.$spacing-unit * 4; /* réduit le vide sous la grille */
+}
+
+/* Stack mobile : espace régulier entre chaque élément */
+.mobileStack {
+  gap: v.$spacing-unit * 4;         /* avant: *3 */
+  margin-bottom: v.$spacing-unit * 4;
+}
+
+/* Petits espacements autour des libellés "ou" pour aérer */
+.orLabel {
+  margin: v.$spacing-unit * 1.5 0;
+}
+
+
+// Breakpoint pour mobile
+@media (max-width: 600px) {
+  .formGrid {
+    display: none;
+  }
+  .mobileStack {
+    display: flex;
+  }
+}

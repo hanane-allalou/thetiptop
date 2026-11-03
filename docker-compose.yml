@@ -1,0 +1,130 @@
+version: "3.8"
+
+services:
+  api-thetiptop:
+    build:
+      context: ./back/app
+      dockerfile: Dockerfile
+    env_file:
+      - ./back/app/.env
+    environment:
+      NODE_ENV: "production"
+      PORT: "3000"
+      FRONT_DIR: "/usr/src/app/front"
+    networks:
+      - proxy
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=furious-ducks_proxy
+
+      # =========================
+      # PROD — SITE PUBLIC (SSR)
+      # =========================
+      - traefik.http.routers.front-prod.rule=Host(`thetiptop.wk-dsp5-archi-o23dis-5-g4.fr`)
+      - traefik.http.routers.front-prod.entrypoints=web,websecure
+      - traefik.http.routers.front-prod.tls.certresolver=le
+      - traefik.http.routers.front-prod.priority=100
+      - traefik.http.routers.front-prod.service=api-ssr
+      - traefik.http.services.api-ssr.loadbalancer.server.port=3000
+
+      # =========================
+      # PROD — API technique
+      # =========================
+      - traefik.http.routers.api-prod.rule=Host(`api-thetiptop.wk-dsp5-archi-o23dis-5-g4.fr`)
+      - traefik.http.routers.api-prod.entrypoints=web,websecure
+      - traefik.http.routers.api-prod.tls.certresolver=le
+      - traefik.http.routers.api-prod.service=api-rest
+      - traefik.http.services.api-rest.loadbalancer.server.port=3000
+
+      # =========================
+      # PROD — /metrics
+      # =========================
+      - traefik.http.routers.metrics-prod.rule=Host(`api-thetiptop.wk-dsp5-archi-o23dis-5-g4.fr`) && Path(`/metrics`)
+      - traefik.http.routers.metrics-prod.entrypoints=web,websecure
+      - traefik.http.routers.metrics-prod.tls.certresolver=le
+      - traefik.http.routers.metrics-prod.service=api-metrics
+      - traefik.http.services.api-metrics.loadbalancer.server.port=3000
+      - metrics.enable=true
+      - metrics.path=/metrics
+      - metrics.port=3000
+
+      # =========================
+      # PREPROD — SITE PUBLIC
+      # =========================
+      - traefik.http.routers.front-preprod.rule=Host(`thetiptop-preprod.wk-dsp5-archi-o23dis-5-g4.fr`)
+      - traefik.http.routers.front-preprod.entrypoints=web,websecure
+      - traefik.http.routers.front-preprod.tls.certresolver=le
+      - traefik.http.routers.front-preprod.service=api-ssr-preprod
+      - traefik.http.services.api-ssr-preprod.loadbalancer.server.port=3000
+
+      # PREPROD — API technique
+      - traefik.http.routers.api-preprod.rule=Host(`preprod-api.thetiptop.wk-dsp5-archi-o23dis-5-g4.fr`)
+      - traefik.http.routers.api-preprod.entrypoints=web,websecure
+      - traefik.http.routers.api-preprod.tls.certresolver=le
+      - traefik.http.routers.api-preprod.service=api-rest-preprod
+      - traefik.http.services.api-rest-preprod.loadbalancer.server.port=3000
+
+      # PREPROD — /metrics
+      - traefik.http.routers.metrics-preprod.rule=Host(`preprod-api.thetiptop.wk-dsp5-archi-o23dis-5-g4.fr`) && Path(`/metrics`)
+      - traefik.http.routers.metrics-preprod.entrypoints=web,websecure
+      - traefik.http.routers.metrics-preprod.tls.certresolver=le
+      - traefik.http.routers.metrics-preprod.service=api-metrics-preprod
+      - traefik.http.services.api-metrics-preprod.loadbalancer.server.port=3000
+
+      # =========================
+      # DEV — SITE PUBLIC
+      # =========================
+      - traefik.http.routers.front-dev.rule=Host(`thetiptop-dev.wk-dsp5-archi-o23dis-5-g4.fr`)
+      - traefik.http.routers.front-dev.entrypoints=web,websecure
+      - traefik.http.routers.front-dev.tls.certresolver=le
+      - traefik.http.routers.front-dev.service=api-ssr-dev
+      - traefik.http.services.api-ssr-dev.loadbalancer.server.port=3000
+
+      # DEV — API technique
+      - traefik.http.routers.api-dev.rule=Host(`api-thetiptop-dev.wk-dsp5-archi-o23dis-5-g4.fr`)
+      - traefik.http.routers.api-dev.entrypoints=web,websecure
+      - traefik.http.routers.api-dev.tls.certresolver=le
+      - traefik.http.routers.api-dev.service=api-rest-dev
+      - traefik.http.services.api-rest-dev.loadbalancer.server.port=3000
+
+      # DEV — /metrics
+      - traefik.http.routers.metrics-dev.rule=Host(`api-thetiptop-dev.wk-dsp5-archi-o23dis-5-g4.fr`) && Path(`/metrics`)
+      - traefik.http.routers.metrics-dev.entrypoints=web,websecure
+      - traefik.http.routers.metrics-dev.tls.certresolver=le
+      - traefik.http.routers.metrics-dev.service=api-metrics-dev
+      - traefik.http.services.api-metrics-dev.loadbalancer.server.port=3000
+
+  admin-thetiptop:
+    build:
+      context: ./admin/next-admin/frontend
+      dockerfile: Dockerfile
+    env_file:
+      - ./admin/next-admin/frontend/.env
+    networks:
+      - proxy
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=furious-ducks_proxy
+
+      # PROD
+      - traefik.http.routers.admin-prod.rule=Host(`adminthetiptop.wk-dsp5-archi-o23dis-5-g4.fr`)
+      - traefik.http.routers.admin-prod.entrypoints=web,websecure
+      - traefik.http.routers.admin-prod.tls.certresolver=le
+      - traefik.http.services.admin-prod.loadbalancer.server.port=3000
+
+      # PREPROD
+      - traefik.http.routers.admin-preprod.rule=Host(`adminthetiptop-preprod.wk-dsp5-archi-o23dis-5-g4.fr`)
+      - traefik.http.routers.admin-preprod.entrypoints=web,websecure
+      - traefik.http.routers.admin-preprod.tls.certresolver=le
+      - traefik.http.services.admin-preprod.loadbalancer.server.port=3000
+
+      # DEV
+      - traefik.http.routers.admin-dev.rule=Host(`admin-thetiptop-dev.wk-dsp5-archi-o23dis-5-g4.fr`)
+      - traefik.http.routers.admin-dev.entrypoints=web,websecure
+      - traefik.http.routers.admin-dev.tls.certresolver=le
+      - traefik.http.services.admin-dev.loadbalancer.server.port=3000
+
+networks:
+  proxy:
+    external: true
+    name: furious-ducks_proxy

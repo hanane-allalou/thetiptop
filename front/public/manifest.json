@@ -1,0 +1,25 @@
+{
+  "name": "Thé Tip Top — Jeu-concours officiel",
+  "short_name": "Thé Tip Top",
+  "lang": "fr-FR",
+  "id": "/",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "description": "Participez à notre grand jeu-concours pour l’ouverture à Nice : 100% des tickets gagnants et un tirage final pour 1 an de thé (360€) !",
+  "theme_color": "#FEF7EB",
+  "background_color": "#ffffff",
+  "icons": [
+    { "src": "/favicon.ico", "sizes": "64x64 32x32 24x24 16x16", "type": "image/x-icon" },
+    { "src": "/logo192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/logo512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "shortcuts": [
+    {
+      "name": "Jouer",
+      "short_name": "Jouer",
+      "url": "/jeu",
+      "icons": [{ "src": "/icons/shortcut-gift.png", "sizes": "96x96", "type": "image/png" }]
+    }
+  ]
+}

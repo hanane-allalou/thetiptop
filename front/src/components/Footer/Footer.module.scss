@@ -1,0 +1,51 @@
+/* src/components/Footer/Footer.module.scss */
+@import '../../styles/_variables.scss';
+
+.footer {
+  background-color: $color-bg;
+  margin-top: auto;        
+}
+
+.topBorder {
+  height: 4px;
+  background-color: $color-primary;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-unit * 2 $spacing-unit * 4;
+}
+
+.socials {
+  display: flex;
+  gap: $spacing-unit * 2;
+  color: $color-dark;        
+  font-size: 20px;           
+  align-items: center;
+}
+
+.socialLink,
+.socials a {
+  color: inherit;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: color .2s ease, transform .15s ease;
+  &:hover,
+  &:focus { color: $color-primary; transform: translateY(-1px); }
+  &:focus-visible { outline: 2px solid rgba($color-primary, .35); outline-offset: 2px; }
+}
+
+.links {
+  display: flex;
+  gap: $spacing-unit * 4;
+}
+
+.link {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: $color-dark;
+  cursor: pointer;
+}

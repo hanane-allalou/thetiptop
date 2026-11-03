@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Bloquer les pages privées / techniques / sans intérêt SEO
+Disallow: /admin
+Disallow: /profil
+Disallow: /historique
+Disallow: /connexion
+Disallow: /oauth-success
+Disallow: /jeu
+# Éviter les doublons et anciennes routes
+Disallow: /home
+Disallow: /jouer
+
+
+# Sitemap
+Sitemap: https://thetiptop.wk-dsp5-archi-o23dis-5-g4.fr/sitemap.xml

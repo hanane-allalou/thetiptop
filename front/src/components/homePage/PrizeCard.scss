@@ -1,0 +1,149 @@
+// Variables de couleurs
+$primary-green: #142C24;
+$secondary-gold: #BF8D3D;
+$background-cream: #FEF7EB;
+$text-dark: #2C2C2C;
+$text-light: #666;
+$white: #FFFFFF;
+
+// Variables d'espacement
+$spacing-xs: 0.5rem;
+$spacing-sm: 1rem;
+$spacing-md: 1.5rem;
+$spacing-lg: 2rem;
+
+// Variables de taille
+$border-radius-md: 12px;
+$border-radius-lg: 16px;
+
+// Mixins
+@mixin card-shadow {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+@mixin hover-lift {
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  }
+}
+
+// Prize Card
+.prize-card {
+  @include card-shadow;
+  @include hover-lift;
+  background: $white;
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  position: relative;
+  margin-bottom: 30px;
+
+  .prize-image-container {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+
+    .prize-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .prize-percentage {
+      position: absolute;
+      top: $spacing-sm;
+      right: $spacing-sm;
+      background: $secondary-gold;
+      color: $white;
+      padding: $spacing-xs $spacing-sm;
+      border-radius: 50px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      box-shadow: 0 2px 10px rgba($secondary-gold, 0.3);
+    }
+  }
+
+  .prize-content {
+    padding: $spacing-md;
+
+    .prize-name {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: $spacing-xs;
+      color: $text-dark;
+      line-height: 1.3;
+    }
+
+    .prize-description {
+      color: $text-light;
+      font-size: 0.875rem;
+      line-height: 1.4;
+      margin-bottom: $spacing-xs;
+    }
+
+    .prize-value {
+      color: $secondary-gold;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+  }
+
+  // Hover effects
+  &:hover {
+    .prize-image {
+      transform: scale(1.05);
+    }
+  }
+
+  // Special styling for premium prizes
+  &.premium-prize {
+    border: 2px solid rgba($secondary-gold, 0.3);
+    background: linear-gradient(135deg, $white, rgba($secondary-gold, 0.02));
+
+    .prize-percentage {
+      background: linear-gradient(135deg, $secondary-gold, lighten($secondary-gold, 10%));
+      animation: pulse 2s infinite;
+    }
+  }
+}
+
+// Animation for premium prizes
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .prize-card {
+    .prize-content {
+      padding: $spacing-sm;
+
+      .prize-name {
+        font-size: 1rem;
+      }
+
+      .prize-description {
+        font-size: 0.8rem;
+      }
+    }
+
+    .prize-image-container {
+      .prize-percentage {
+        top: $spacing-xs;
+        right: $spacing-xs;
+        font-size: 0.75rem;
+        padding: 4px $spacing-xs;
+      }
+    }
+  }
+}

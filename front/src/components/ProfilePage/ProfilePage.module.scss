@@ -1,0 +1,254 @@
+@import '../../styles/_variables.scss';
+
+/* Fallbacks au cas où certaines variables n'existent pas */
+$border-radius: 12px !default;
+$spacing-unit: 8px !default;
+$color-bg: #fff !default;
+$color-dark: #142C24 !default;
+$color-primary: #0b6b4b !default;
+
+.container {
+  background-color: $color-bg;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $spacing-unit * 6;
+  gap: $spacing-unit * 4;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: auto; 
+  padding: 0 $spacing-unit * 6 $spacing-unit * 6;
+  
+
+  /* micro animation d’entrée */
+  @media (prefers-reduced-motion: no-preference) {
+    animation: fadeInUp 260ms ease-out both;
+  }
+}
+
+/* Réduit le top space & remonte légèrement la page */
+.compactTop {
+  padding-top: $spacing-unit * 2 !important;  // avant: *6
+  margin-top: -$spacing-unit * 2;             // remonte d’un cran sans chevaucher
+}
+
+.avatarWrapper {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+  transition: transform 220ms ease, box-shadow 240ms ease;
+
+  /* Anneau en dégradé sans mask/vendor */
+  padding: 2px; /* épaisseur de l’anneau */
+  background:
+    linear-gradient($color-bg, $color-bg) padding-box,
+    conic-gradient(from 0deg,
+      rgba(20,44,36,0.15),
+      rgba(20,44,36,0.00),
+      rgba(20,44,36,0.15)
+    ) border-box;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 32px rgba(0,0,0,0.12);
+  }
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: inherit;
+}
+
+.name {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 32px;
+  color: $color-dark;
+  margin: 0; /* supprime toute marge par défaut */
+}
+
+.fieldWrapper {
+  position: relative;
+  width: 400px;
+  max-width: 90%;
+}
+
+.field {
+  width: 100%;
+
+  .MuiOutlinedInput-root {
+    border-radius: $border-radius;
+    transition: box-shadow 200ms ease, transform 160ms ease;
+
+    &:hover {
+      transform: translateY(-1px);
+    }
+
+    &.Mui-focused {
+      box-shadow: 0 0 0 4px rgba(20,44,36,0.10);
+    }
+  }
+}
+
+.link {
+  position: absolute;
+  right: $spacing-unit;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: $color-primary;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 160ms ease, transform 160ms ease;
+
+  &:hover,
+  &:focus {
+    color: darken($color-primary, 8%);
+    transform: translateY(calc(-50% - 1px));
+  }
+}
+
+.premiumWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 400px;
+  max-width: 90%;
+  padding: $spacing-unit * 1.5;
+  border: 1px solid rgba(20,44,36,0.18);
+  border-radius: $border-radius;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(20,44,36,0.06);
+}
+
+.premiumText,
+.premiumDetail {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+}
+
+.premiumDetail {
+  font-weight: 700;
+}
+
+.historyButton {
+  background-color: #142C24 !important;
+  color: #fff !important;
+  width: 200px;
+  height: 56px;
+  border-radius: $border-radius !important;
+  text-transform: none !important;
+  box-shadow: 0 10px 22px rgba(20,44,36,0.18);
+  transition: transform 200ms ease, box-shadow 220ms ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 30px rgba(20,44,36,0.24);
+  }
+
+  &:active {
+    transform: translateY(0) scale(0.98);
+  }
+}
+
+/* Toast en haut de page */
+.toast {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1200;
+  padding: 10px 16px;
+  border-radius: $border-radius;
+  font-weight: 600;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+  border: 1px solid rgba(0,0,0,0.06);
+  background: #f7fbff;
+  color: #0b365a;
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: fadeInDown 220ms ease-out both;
+  }
+}
+
+.toastInfo {
+  /* noop visuel léger pour éviter la règle vide */
+  letter-spacing: 0.01em;
+}
+
+
+/* Animations légères */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translate(-50%, -8px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* Responsive petites largeurs */
+@media (max-width: 480px) {
+  .historyButton { width: 100%; }
+  .premiumWrapper { width: 100%; }
+  .fieldWrapper { width: 100%; }
+}
+
+.buttonsWrapper {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.myButton {
+  background-color: $color-dark;
+  color: #fff !important;
+  border-radius: $border-radius !important;
+  padding: 10px 20px;
+  text-transform: none !important;
+  box-shadow: 0 10px 22px rgba(20,44,36,0.18);
+  transition: transform 200ms ease, box-shadow 220ms ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 30px rgba(20,44,36,0.24);
+  }
+
+  &:active {
+    transform: translateY(0) scale(0.98);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+  }
+}
+
+.deleteButton {
+  background-color: #c62828;
+  color: #fff !important;
+  border-radius: $border-radius !important;
+  padding: 10px 20px;
+  text-transform: none !important;
+  box-shadow: 0 10px 22px rgba(20,44,36,0.18);
+  transition: transform 200ms ease, box-shadow 220ms ease;
+
+  &:hover {
+    background-color: #b71c1c;
+    transform: translateY(-2px);
+    box-shadow: 0 16px 30px rgba(20,44,36,0.24);
+  }
+
+  &:active {
+    transform: translateY(0) scale(0.98);
+  }
+}
+

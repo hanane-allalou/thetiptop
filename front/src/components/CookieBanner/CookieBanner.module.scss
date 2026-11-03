@@ -1,0 +1,110 @@
+@use '../../styles/variables' as v;
+
+$spacing: v.$spacing-unit !default;
+$radius: v.$border-radius !default;
+
+.banner {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 1600;
+  padding: $spacing * 2 $spacing * 3;
+  box-sizing: border-box;
+
+  /* conteneur centré */
+  max-width: 1100px;
+  margin: 0 auto $spacing * 2;
+  background: #fff;
+  border: 1px solid rgba(20,44,36,0.12);
+  border-radius: $radius;
+  box-shadow: 0 10px 24px rgba(20,44,36,0.14);
+
+  display: flex;
+  gap: $spacing * 3;
+  align-items: center;
+  justify-content: space-between;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: left;
+    margin: 0 $spacing * 2 $spacing * 2;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: slideUp 240ms ease-out both;
+  }
+}
+
+.texts {
+  display: grid;
+  gap: $spacing;
+  min-width: 0;
+}
+.title {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: v.$color-dark;
+}
+.body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: v.$color-dark;
+  opacity: .9;
+}
+.manageLink {
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: v.$color-primary;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.actions {
+  display: flex;
+  gap: $spacing * 1.5;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+
+  @media (max-width: 800px) { justify-content: stretch; }
+}
+
+/* Boutons harmonisés (comme .playButton) */
+.primaryButton {
+  background-color: #142C24 !important;
+  color: #fff !important;
+  height: 48px !important;
+  border-radius: $radius !important;
+  text-transform: none !important;
+  box-shadow: 0 8px 18px rgba(20, 44, 36, 0.18);
+  transition: transform 180ms ease, box-shadow 220ms ease, opacity 160ms ease;
+
+  &:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(20,44,36,0.22); }
+  &:active { transform: translateY(0) scale(0.98); }
+}
+.secondaryButton {
+  background: #fff !important;
+  color: v.$color-dark !important;
+  height: 48px !important;
+  border-radius: $radius !important;
+  border: 1px solid v.$color-dark !important;
+  text-transform: none !important;
+  transition: transform 160ms ease, box-shadow 200ms ease;
+
+  &:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(20,44,36,.12); }
+  &:active { transform: translateY(0) scale(0.98); }
+}
+
+/* Animations */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

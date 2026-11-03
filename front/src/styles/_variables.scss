@@ -1,0 +1,13 @@
+// couleurs
+$color-bg:       #FEF7EB;  // fond de page
+$color-primary:  #C28D34;  // boutons
+$color-dark:     #1E2623;  // texte et bordures
+
+// espacement et arrondis
+$spacing-unit:   8px;
+$border-radius:  8px;
+
+:root { --header-h: 72px; }        /* desktop */
+@media (max-width: 600px) {
+  :root { --header-h: 56px; }      /* mobile */
+}
