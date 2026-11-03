@@ -2,6 +2,18 @@
 
 Application composée d’une API Symfony, d’un site public React et d’une interface d’administration React/Vite.
 
+## Présentation
+
+TheTipTop est une plateforme web de jeu-concours pour une enseigne spécialisée dans le thé. Elle permet aux clients de créer un compte, de participer avec leurs tickets et de suivre leurs participations et leurs gains.
+
+L’application comprend trois espaces complémentaires :
+
+- **Site public** : inscription et connexion, participation au jeu et consultation de l’historique.
+- **Espace employé** : recherche de tickets et de gagnants, puis suivi de la remise des lots.
+- **Administration** : gestion des utilisateurs, statistiques, exports et suivi du grand gagnant.
+
+L’API Symfony centralise les règles métier, l’authentification et l’accès à MySQL. Les interfaces React communiquent avec elle via une API HTTP. Le périmètre actuel porte sur le jeu-concours ; la boutique en ligne et le paiement ne sont pas encore implémentés.
+
 ## Prérequis
 
 - PHP 8.2+ et Composer
